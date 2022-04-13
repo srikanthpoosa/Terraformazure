@@ -1,0 +1,40 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+   name: selfLinuxagent
+   demands: 
+    - agent.name -equals myLinuxVM
+
+stages:
+- stage: Build
+  jobs:
+    - job: Fristjob
+      steps:
+        - bash: echo build firstjob
+    - job: secondjob
+      steps:
+        - bash: echo build second job
+        - bash: echo $(PipelineLevelVariable)
+        - bash: echo $(Build.BuildNumber) 
+        - bash: echo $(Build.BuildId)
+        - bash: echo $(Build.SourceBranchName)
+        - bash: echo $(Build.SourcesDirectory)
+        - bash: echo $(System.DefaultWorkingDirectory)
+        - bash: ls -R $(System.DefaultWorkingDirectory)
+        - bash: echo $(Build.ArtifactStagingDirectory)
+        - bash: java --version
+        - bash: terraform --version
+        - bash: mvn --version
+        - bash: ls -R $(System.DefaultWorkingDirectory)
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(System.DefaultWorkingDirectory)'
+            Contents: '**/*yaml'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        - bash: ls -R $(System.DefaultWorkingDirectory)
