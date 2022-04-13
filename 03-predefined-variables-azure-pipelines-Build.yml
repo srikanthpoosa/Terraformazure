@@ -28,4 +28,10 @@ stages:
         - bash: echo $(System.DefaultWorkingDirectory)
         - bash: ls -R $(System.DefaultWorkingDirectory)
         - bash: echo $(Build.ArtifactStagingDirectory)
+        - bash: ls -R $(Build.ArtifactStagingDirectory)
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
         
