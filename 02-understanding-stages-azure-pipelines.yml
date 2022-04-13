@@ -17,6 +17,9 @@ stages:
     - job: Fristjob
       steps:
         - bash: echo build firstjob
+    - job: secondjob
+      steps:
+        - bash: echo build second job
 - stage: Devdeploy
   jobs:
      - job: Devdeployjob
