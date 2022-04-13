@@ -28,9 +28,6 @@ stages:
         - bash: echo $(System.DefaultWorkingDirectory)
         - bash: ls -R $(System.DefaultWorkingDirectory)
         - bash: echo $(Build.ArtifactStagingDirectory)
-        - bash: java --version
-        - bash: terraform --version
-        - bash: mvn --version
         - bash: ls -R $(System.DefaultWorkingDirectory)
         - task: CopyFiles@2
           inputs:
